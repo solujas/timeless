@@ -3,8 +3,7 @@
 import { useState, useEffect } from 'react';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
-import dayjs from '@/app/lib/dayjs';
-import { Post, PostWithMetadata } from './types';
+import { PostWithMetadata } from './types';
 
 export default function Home() {
   const [posts, setPosts] = useState<PostWithMetadata[]>([]);

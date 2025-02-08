@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { Post, LikePostData } from "@/app/types";
+import { LikePostData } from "@/app/types";
 import { getPosts, savePosts } from "@/app/lib/storage";
 
 export async function POST(request: Request) {
@@ -33,6 +33,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(posts[postIndex]);
   } catch (error) {
+    console.error('Failed to like post:', error);
     return NextResponse.json({ error: "Failed to like post" }, { status: 500 });
   }
 }
