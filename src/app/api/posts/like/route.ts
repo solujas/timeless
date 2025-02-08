@@ -32,8 +32,8 @@ export async function POST(request: Request) {
     savePosts(posts);
 
     return NextResponse.json(posts[postIndex]);
-  } catch (error) {
-    console.error('Failed to like post:', error);
+  } catch (err) {
+    console.error('Failed to like post:', err);
     return NextResponse.json({ error: "Failed to like post" }, { status: 500 });
   }
 }

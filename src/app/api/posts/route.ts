@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { Post, CreatePostData } from "@/app/types";
+import { CreatePostData } from "@/app/types";
 import { getPosts, savePosts } from "@/app/lib/storage";
 
 const POST_LIFETIME = 5 * 60 * 1000; // 5 minutes in milliseconds
@@ -19,8 +19,8 @@ export async function GET() {
       }));
 
     return NextResponse.json(activePosts);
-  } catch (error) {
-    console.error('Error fetching posts:', error);
+  } catch (err) {
+    console.error('Error fetching posts:', err);
     return NextResponse.json([], { status: 500 });
   }
 }
@@ -51,7 +51,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const newPost: Post = {
+    const newPost = {
       id: Math.random().toString(36).substring(2),
       content,
       createdAt: now,
@@ -61,8 +61,8 @@ export async function POST(request: Request) {
     savePosts([newPost, ...activePosts]);
 
     return NextResponse.json(newPost);
-  } catch (error) {
-    console.error('Failed to create post:', error);
+  } catch (err) {
+    console.error('Failed to create post:', err);
     return NextResponse.json({ error: "Failed to create post" }, { status: 500 });
   }
 }
