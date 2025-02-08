@@ -3,19 +3,35 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --gruvbox-bg0: #282828;
+  --gruvbox-bg1: #3c3836;
+  --gruvbox-bg2: #504945;
+  --gruvbox-fg0: #fbf1c7;
+  --gruvbox-fg1: #ebdbb2;
+  --gruvbox-red: #cc241d;
+  --gruvbox-green: #98971a;
+  --gruvbox-yellow: #d79921;
+  --gruvbox-blue: #458588;
+  --gruvbox-purple: #b16286;
+  --gruvbox-aqua: #689d6a;
+  --gruvbox-orange: #d65d0e;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  font-family: var(--font-playfair), serif;
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-md transition-colors duration-200;
+  }
+  
+  .btn-primary {
+    @apply bg-gruvbox-blue text-gruvbox-fg0 hover:bg-gruvbox-blue/90;
+  }
+
+  .input {
+    @apply bg-gruvbox-bg1 border border-gruvbox-bg2 rounded-md px-4 py-2 text-gruvbox-fg0 focus:outline-none focus:ring-2 focus:ring-gruvbox-blue;
+  }
 }
