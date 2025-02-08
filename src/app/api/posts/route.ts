@@ -1,14 +1,13 @@
-import { kv } from "@vercel/kv";
 import { NextResponse } from "next/server";
 import { Post, CreatePostData } from "@/app/types";
+import { getPosts, savePosts } from "@/app/lib/storage";
 
-const POSTS_KEY = "posts";
 const POST_LIFETIME = 5 * 60 * 1000; // 5 minutes in milliseconds
 const MAX_POSTS = 100;
 
 export async function GET() {
   try {
-    const posts = (await kv.get<Post[]>(POSTS_KEY)) || [];
+    const posts = getPosts();
     const now = Date.now();
 
     // Filter out expired posts and add timeLeft
@@ -21,7 +20,8 @@ export async function GET() {
 
     return NextResponse.json(activePosts);
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch posts" }, { status: 500 });
+    console.error('Error fetching posts:', error);
+    return NextResponse.json([], { status: 500 });
   }
 }
 
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const posts = (await kv.get<Post[]>(POSTS_KEY)) || [];
+    const posts = getPosts();
     const now = Date.now();
 
     // Filter out expired posts
@@ -58,7 +58,7 @@ export async function POST(request: Request) {
       likes: 0,
     };
 
-    await kv.set(POSTS_KEY, [newPost, ...activePosts]);
+    savePosts([newPost, ...activePosts]);
 
     return NextResponse.json(newPost);
   } catch (error) {

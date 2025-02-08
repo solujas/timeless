@@ -9,24 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        gruvbox: {
-          bg0: "var(--gruvbox-bg0)",
-          bg1: "var(--gruvbox-bg1)",
-          bg2: "var(--gruvbox-bg2)",
-          fg0: "var(--gruvbox-fg0)",
-          fg1: "var(--gruvbox-fg1)",
-          red: "var(--gruvbox-red)",
-          green: "var(--gruvbox-green)",
-          yellow: "var(--gruvbox-yellow)",
-          blue: "var(--gruvbox-blue)",
-          purple: "var(--gruvbox-purple)",
-          aqua: "var(--gruvbox-aqua)",
-          orange: "var(--gruvbox-orange)",
-        },
-      },
-      fontFamily: {
-        playfair: ["var(--font-playfair)", "serif"],
-      },
+        'theme-bg0': 'var(--theme-bg0)',
+        'theme-bg1': 'var(--theme-bg1)',
+        'theme-bg2': 'var(--theme-bg2)',
+        'theme-fg0': 'var(--theme-fg0)',
+        'theme-fg1': 'var(--theme-fg1)',
+        'theme-accent': 'var(--theme-accent)',
+        'theme-error': 'var(--theme-error)'
+      }
     },
   },
   plugins: [],

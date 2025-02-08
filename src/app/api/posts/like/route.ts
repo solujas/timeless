@@ -1,8 +1,6 @@
-import { kv } from "@vercel/kv";
 import { NextResponse } from "next/server";
 import { Post, LikePostData } from "@/app/types";
-
-const POSTS_KEY = "posts";
+import { getPosts, savePosts } from "@/app/lib/storage";
 
 export async function POST(request: Request) {
   try {
@@ -15,7 +13,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const posts = (await kv.get<Post[]>(POSTS_KEY)) || [];
+    const posts = getPosts();
     const postIndex = posts.findIndex((post) => post.id === postId);
 
     if (postIndex === -1) {
@@ -31,7 +29,7 @@ export async function POST(request: Request) {
       likes: posts[postIndex].likes + 1,
     };
 
-    await kv.set(POSTS_KEY, posts);
+    savePosts(posts);
 
     return NextResponse.json(posts[postIndex]);
   } catch (error) {

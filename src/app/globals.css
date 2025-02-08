@@ -3,18 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --gruvbox-bg0: #282828;
-  --gruvbox-bg1: #3c3836;
-  --gruvbox-bg2: #504945;
-  --gruvbox-fg0: #fbf1c7;
-  --gruvbox-fg1: #ebdbb2;
-  --gruvbox-red: #cc241d;
-  --gruvbox-green: #98971a;
-  --gruvbox-yellow: #d79921;
-  --gruvbox-blue: #458588;
-  --gruvbox-purple: #b16286;
-  --gruvbox-aqua: #689d6a;
-  --gruvbox-orange: #d65d0e;
+  --theme-bg0: #000000;
+  --theme-bg1: #1a1a1a;
+  --theme-bg2: #333333;
+  --theme-fg0: #ffffff;
+  --theme-fg1: #cccccc;
+  --theme-accent: #666666;
+  --theme-error: #ff0000;
 }
 
 body {
@@ -28,10 +23,52 @@ body {
   }
   
   .btn-primary {
-    @apply bg-gruvbox-blue text-gruvbox-fg0 hover:bg-gruvbox-blue/90;
+    @apply bg-theme-accent text-theme-fg0 hover:opacity-90;
   }
 
   .input {
-    @apply bg-gruvbox-bg1 border border-gruvbox-bg2 rounded-md px-4 py-2 text-gruvbox-fg0 focus:outline-none focus:ring-2 focus:ring-gruvbox-blue;
+    @apply bg-theme-bg1 border border-theme-bg2 rounded-md px-4 py-2 text-theme-fg0 focus:outline-none focus:ring-2 focus:ring-theme-accent;
+  }
+
+  .feed-container {
+    @apply flex flex-col h-[calc(100vh-4rem)] sm:h-[calc(100vh-8rem)] gap-4;
+  }
+
+  .posts-feed {
+    @apply flex-1 overflow-y-auto px-2 sm:px-4;
+  }
+
+  .post-item {
+    @apply mb-3 sm:mb-4 p-3 sm:p-4 bg-theme-bg1 rounded-lg border border-theme-bg2;
+  }
+
+  .post-content {
+    @apply text-theme-fg0 mb-2 sm:mb-3 text-sm sm:text-base;
+  }
+
+  .post-metadata {
+    @apply flex justify-between items-center text-xs sm:text-sm text-theme-fg1;
+  }
+
+  .like-button {
+    @apply text-theme-error hover:opacity-80 transition-opacity;
+  }
+
+  .post-form {
+    @apply sticky bottom-0 w-full bg-theme-bg0 p-3 sm:p-4 rounded-t-lg border-t border-theme-bg2;
+  }
+
+  @media (min-width: 1024px) {
+    .feed-container {
+      @apply flex-row gap-6;
+    }
+
+    .posts-feed {
+      @apply border-r border-theme-bg2;
+    }
+
+    .post-form {
+      @apply w-96 rounded-lg border border-theme-bg2;
+    }
   }
 }
